@@ -60,7 +60,7 @@
 
 	var _NewsList2 = _interopRequireDefault(_NewsList);
 
-	__webpack_require__(181);
+	__webpack_require__(183);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -31222,11 +31222,22 @@
 	  _createClass(NewsList, [{
 	    key: 'render',
 	    value: function render() {
+	      var testData = {
+	        "by": "bane",
+	        "descendants": 49,
+	        "id": 11600137,
+	        "kids": [11600476, 11600473, 11600501, 11600463, 11600452, 11600528, 11600421, 11600577, 11600483],
+	        "score": 56,
+	        "time": 1461985332,
+	        "title": "Yahoo's Marissa Mayer could get $55M in severance pay",
+	        "type": "story",
+	        "url": "http://www.latimes.com/business/technology/la-fi-0429-tn-marissa-mayer-severance-20160429-story.html"
+	      };
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'newsList' },
 	        _react2.default.createElement(_NewsHeader2.default, null),
-	        _react2.default.createElement(_NewsItem2.default, null)
+	        _react2.default.createElement(_NewsItem2.default, { item: testData, rank: 1 })
 	      );
 	    }
 	  }]);
@@ -31277,6 +31288,8 @@
 
 	  _createClass(NewsHeader, [{
 	    key: 'getLogo',
+
+	    // 获取logo
 	    value: function getLogo() {
 	      return _react2.default.createElement(
 	        'div',
@@ -31288,6 +31301,8 @@
 	        )
 	      );
 	    }
+	    // 获取title
+
 	  }, {
 	    key: 'getTitle',
 	    value: function getTitle() {
@@ -31301,6 +31316,8 @@
 	        )
 	      );
 	    }
+	    // 获取导航条
+
 	  }, {
 	    key: 'getNav',
 	    value: function getNav() {
@@ -31336,6 +31353,21 @@
 	        })
 	      );
 	    }
+	    // 登录入口
+
+	  }, {
+	    key: 'getLogin',
+	    value: function getLogin() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'newsHeader-login' },
+	        _react2.default.createElement(
+	          'a',
+	          { className: 'newsHeader-textLink', href: 'http://localhost:8080/login?goto=news' },
+	          'login'
+	        )
+	      );
+	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
@@ -31344,7 +31376,8 @@
 	        { className: 'newsHeader' },
 	        this.getLogo(),
 	        this.getTitle(),
-	        this.getNav()
+	        this.getNav(),
+	        this.getLogin()
 	      );
 	    }
 	  }]);
@@ -31395,7 +31428,7 @@
 
 
 	// module
-	exports.push([module.id, ".newsHeader {\n  align-items: center;\n  background: #ff6600;\n  color: black;\n  display: flex;\n  font-size: 10pt;\n  padding: 2px;\n}\n\n.newsHeader-logo {\n  border: 1px solid white;\n  flex-basis: 18px;\n  height: 18px;\n}\n\n.newsHeader-textLink {\n  color: black;\n  text-decoration: none;\n}\n\n.newsHeader-title {\n  font-weight: bold;\n  margin-left: 4px;\n}\n\n.newsHeader-nav {\n   flex-grow: 1;\n   margin-left: 10px;\n}\n\n.newsHeader-navLink:not(:first-child)::before {\n   content: ' | ';\n}\n", ""]);
+	exports.push([module.id, ".newsHeader {\n  align-items: center;\n  background: #ff6600;\n  color: black;\n  display: flex;\n  font-size: 10pt;\n  padding: 2px;\n}\n\n.newsHeader-logo {\n  border: 1px solid white;\n  flex-basis: 18px;\n  height: 18px;\n}\n\n.newsHeader-textLink {\n  color: black;\n  text-decoration: none;\n}\n\n.newsHeader-title {\n  font-weight: bold;\n  margin-left: 4px;\n}\n\n.newsHeader-nav {\n   flex-grow: 1;\n   margin-left: 10px;\n}\n\n.newsHeader-navLink:not(:first-child)::before {\n   content: ' | ';\n}\n\n.newsHeader-login {\n  margin-right: 5px;\n}\n", ""]);
 
 	// exports
 
@@ -31712,7 +31745,7 @@
 /* 180 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -31723,6 +31756,8 @@
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
+
+	__webpack_require__(181);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -31742,12 +31777,16 @@
 	  }
 
 	  _createClass(NewsItem, [{
-	    key: "render",
+	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        "div",
-	        { className: "newsItem" },
-	        "I am NewsItem."
+	        'div',
+	        { className: 'newsItem' },
+	        _react2.default.createElement(
+	          'a',
+	          { className: 'NewsItem-titleLink', href: this.props.item.url },
+	          this.props.item.title
+	        )
 	      );
 	    }
 	  }]);
@@ -31773,6 +31812,46 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
+			module.hot.accept("!!./../node_modules/css-loader/index.js!./NewsItem.css", function() {
+				var newContent = require("!!./../node_modules/css-loader/index.js!./NewsItem.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 182 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(178)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".newsItem {\n   color: #828282;\n   margin-top: 5px;\n   align-items: baseline;\n   display: flex;  \n}\n\n.newsItem-titleLink {\n   color: black;\n   font-size: 10pt;\n   text-decoration: none;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 183 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(184);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(179)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
 			module.hot.accept("!!./../node_modules/css-loader/index.js!./app.css", function() {
 				var newContent = require("!!./../node_modules/css-loader/index.js!./app.css");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
@@ -31784,7 +31863,7 @@
 	}
 
 /***/ },
-/* 182 */
+/* 184 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(178)();
