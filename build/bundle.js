@@ -64,7 +64,20 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	(0, _reactDom.render)(_react2.default.createElement(_NewsList2.default, null), (0, _jquery2.default)('#content')[0]); // app.js
+	function get(url) {
+	    return Promise.resolve(_jquery2.default.ajax(url));
+	} // app.js
+
+	get('https://hacker-news.firebaseio.com/v0/topstories.json').then(function (stories) {
+	    return Promise.all(stories.slice(0, 30).map(function (itemId) {
+	        return get('https://hacker-news.firebaseio.com/v0/item/' + itemId + '.json');
+	    }));
+	}).then(function (items) {
+	    (0, _reactDom.render)(_react2.default.createElement(_NewsList2.default, { items: items }), (0, _jquery2.default)('#content')[0]);
+	}).catch(function (err) {
+	    console.log('error occur', err);
+	});
+	(0, _reactDom.render)(_react2.default.createElement(_NewsList2.default, null), (0, _jquery2.default)('#content')[0]);
 
 /***/ },
 /* 1 */
@@ -31222,22 +31235,17 @@
 	  _createClass(NewsList, [{
 	    key: 'render',
 	    value: function render() {
-	      var testData = {
-	        "by": "bane",
-	        "descendants": 49,
-	        "id": 11600137,
-	        "kids": [11600476, 11600473, 11600501, 11600463, 11600452, 11600528, 11600421, 11600577, 11600483],
-	        "score": 56,
-	        "time": 1461985332,
-	        "title": "Yahoo's Marissa Mayer could get $55M in severance pay",
-	        "type": "story",
-	        "url": "http://www.latimes.com/business/technology/la-fi-0429-tn-marissa-mayer-severance-20160429-story.html"
-	      };
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'newsList' },
 	        _react2.default.createElement(_NewsHeader2.default, null),
-	        _react2.default.createElement(_NewsItem2.default, { item: testData, rank: 1 })
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'newsList-newsItem' },
+	          this.props.items.map(function (item, index) {
+	            return _react2.default.createElement(_NewsItem2.default, { key: item.id, item: item, rank: index + 1 });
+	          })
+	        )
 	      );
 	    }
 	  }]);
