@@ -847,3 +847,8 @@ get('https://hacker-news.firebaseio.com/v0/topstories.json').then( function(stor
 - [survivejs](http://survivejs.com/)
 
 > 声明: 本篇很大一部分代码来自于 [mking/react-hn](https://github.com/mking/react-hn), 在这里表示谢意. Thanks!
+
+
+## 其他说明
+
+`app build node_modules` 目录 `package.json webpack.config.js` 文件是以上例子的代码
