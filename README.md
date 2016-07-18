@@ -852,3 +852,5 @@ get('https://hacker-news.firebaseio.com/v0/topstories.json').then( function(stor
 ## 其他说明
 
 `app build node_modules` 目录 `package.json webpack.config.js` 文件是以上例子的代码
+
+### 原帖地址[Learn React & Webpack by building the Hacker News front page](https://github.com/theJian/build-a-hn-front-page)
